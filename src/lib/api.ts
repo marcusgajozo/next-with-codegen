@@ -3,12 +3,7 @@ import { getSdk, Requester } from "@/graphql/generated";
 import { print, ExecutionResult, DocumentNode } from "graphql";
 
 // Tipo para as opções extras do Next.js (cache, tags, revalidate)
-type NextFetchOptions = RequestInit & {
-  next?: {
-    tags?: string[];
-    revalidate?: number | false;
-  };
-};
+type NextFetchOptions = RequestInit;
 
 const requester: Requester<NextFetchOptions> = async <R, V>(
   doc: DocumentNode,
