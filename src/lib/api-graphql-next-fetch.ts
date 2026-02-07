@@ -2,13 +2,10 @@ import { API_URL } from "@/constants/env";
 import { getSdk, Requester } from "@/graphql/generated";
 import { print, ExecutionResult, DocumentNode } from "graphql";
 
-// Tipo para as opções extras do Next.js (cache, tags, revalidate)
-type NextFetchOptions = RequestInit;
-
-const requester: Requester<NextFetchOptions> = async <R, V>(
+const requester: Requester<RequestInit> = async <R, V>(
   doc: DocumentNode,
   vars?: V,
-  options?: NextFetchOptions,
+  options?: RequestInit,
 ): Promise<ExecutionResult<R>> => {
   // O Codegen passa o documento como objeto, convertemos para string
   // Nota: Se o 'doc' já vier como string no seu setup, remova o .loc.source.body
@@ -35,8 +32,8 @@ const requester: Requester<NextFetchOptions> = async <R, V>(
     throw new Error(errorMessage);
   }
 
-  return { data: json.data };
+  return json;
 };
 
 // Exportamos o objeto 'api' que contém todas as suas funções prontas
-export const api = getSdk(requester);
+export const apiGraphqlNextFetch = getSdk(requester);

@@ -1,14 +1,14 @@
-import { api } from "@/lib/api";
+import { apiGraphqlNextFetch } from "@/lib/api-graphql-next-fetch";
 
 export async function ListItem() {
-  const { data } = await api.GetCharactersQuery(
+  const { data } = await apiGraphqlNextFetch.GetCharactersQuery(
     {},
     {
       next: { tags: ["characters"] },
     },
   );
 
-  console.log(data);
+  console.log();
 
   return (
     <div>
